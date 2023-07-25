@@ -1,6 +1,7 @@
 package com.maslov.springinaction.controllers;
 
 import com.maslov.springinaction.models.TacoOrder;
+import com.maslov.springinaction.repos.OrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -18,6 +19,12 @@ import javax.validation.Valid;
 @SessionAttributes("tacoOrder")
 public class OrderController {
 
+    private OrderRepository repo;
+
+    public OrderController(OrderRepository repo) {
+        this.repo = repo;
+    }
+
     @GetMapping("/current")
     public String orderForm() {
         return "orderForm";
@@ -32,7 +39,9 @@ public class OrderController {
             return "orderForm";
         }
         log.info("Order submitted: {}", tacoOrder);
+        repo.save(tacoOrder);
         sessionStatus.setComplete();
+
         return "redirect:/";
     }
 }
