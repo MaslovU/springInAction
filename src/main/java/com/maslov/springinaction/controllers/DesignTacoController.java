@@ -36,17 +36,20 @@ public class DesignTacoController {
     }
 
     @PostMapping
-    public String processTaco(
-            @Valid Taco taco,
-            Errors errors,
-            @ModelAttribute TacoOrder tacoOrder) {
+    public String processTaco(@ModelAttribute("design") @Valid Taco taco, Errors errors, Model model) {
 
         if (errors.hasErrors()) {
+            List<Ingredient> ingredients = (List<Ingredient>) repo.findAll();
+
+            Type[] types = Type.values();
+            for (Type x : types) {
+                model.addAttribute(x.toString().toLowerCase(),
+                        ingredients.stream().filter(p -> p.getType().equals(x)).collect(Collectors.toList()));
+            }
             return "design";
         }
+        log.info("Processing desing: " + taco);
 
-        tacoOrder.addTaco(taco);
-        log.info("Processing taco: {}", taco);
         return "redirect:/orders/current";
     }
 
