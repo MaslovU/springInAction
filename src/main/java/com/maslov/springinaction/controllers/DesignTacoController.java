@@ -49,6 +49,9 @@ public class DesignTacoController {
             return "design";
         }
         log.info("Processing desing: " + taco);
+        TacoOrder order = (TacoOrder) model.getAttribute("tacoOrder");
+        order.addTaco(taco);
+        model.addAttribute("tacoOrder", order);
 
         return "redirect:/orders/current";
     }
