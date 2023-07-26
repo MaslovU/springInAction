@@ -6,12 +6,14 @@ import com.maslov.springinaction.models.Taco;
 import com.maslov.springinaction.models.TacoOrder;
 import com.maslov.springinaction.repos.IngredientRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +25,7 @@ public class DesignTacoController {
 
     private final IngredientRepository repo;
 
+    @Autowired
     public DesignTacoController(IngredientRepository repo) {
         this.repo = repo;
     }
@@ -36,8 +39,8 @@ public class DesignTacoController {
     public String processTaco(
             @Valid Taco taco,
             Errors errors,
-            @ModelAttribute TacoOrder tacoOrder
-    ) {
+            @ModelAttribute TacoOrder tacoOrder) {
+
         if (errors.hasErrors()) {
             return "design";
         }
@@ -49,11 +52,13 @@ public class DesignTacoController {
 
     @ModelAttribute
     public void addIngredientsToModel(Model model) {
-        Iterable<Ingredient> ingredients = repo.findAll();
+        List<Ingredient> ingredients = new ArrayList<>();
+        repo.findAll().forEach(i -> ingredients.add(i));
+
         Type[] types = Type.values();
         for (Type type : types) {
             model.addAttribute(type.toString().toLowerCase(),
-                    filterByType((List<Ingredient>) ingredients, type));
+                    filterByType(ingredients, type));
         }
     }
 

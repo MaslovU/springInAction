@@ -1,6 +1,7 @@
 package com.maslov.springinaction.models;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -11,6 +12,7 @@ import java.util.List;
 
 @Data
 @Table
+@EqualsAndHashCode(exclude = "createdAt")
 public class Taco {
 
     @Id
