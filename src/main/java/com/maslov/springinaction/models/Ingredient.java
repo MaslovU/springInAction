@@ -1,28 +1,27 @@
 package com.maslov.springinaction.models;
 
 import com.maslov.springinaction.enums.Type;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.domain.Persistable;
-import org.springframework.data.relational.core.mapping.Table;
+
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
 
 @Data
-@Table
+@Entity
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PACKAGE, force = true)
-public class Ingredient implements Persistable<String> {
+@NoArgsConstructor(force = true)
+public class Ingredient {
 
     @Id
     private String id;
 
     private String name;
+
+    @Enumerated(value = EnumType.STRING)
     private Type type;
 
-    @Override
-    public boolean isNew() {
-        return true;
-    }
 }
