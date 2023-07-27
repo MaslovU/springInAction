@@ -55,9 +55,7 @@
     <br/>
     <label for="ccExpiration">Expiration: </label>
     <input type="text" th:field="*{ccExpiration}"/>
-    <span class="validationError"
-          th:if="${#fields.hasErrors('ccExpiration')}"
-          th:errors="*{ccExpiration}">CC Expiration Error</span>
+    <span class="validationError" th:if="${#fields.hasErrors('ccExpiration')}" th:errors="*{ccExpiration}">CC Expiration Error</span>
     <br/>
     <label for="ccCvv">Cvv: </label>
     <input type="text" th:field="*{ccCvv}"/>

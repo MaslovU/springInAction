@@ -3,22 +3,22 @@ delete from Taco;
 delete from Taco_Order;
 delete from Ingredient;
 insert into Ingredient (id, name, type)
-values ('FLTO', 'Flour Tortilla', 'WRAP');
+values (1, 'Flour Tortilla', 'WRAP');
 insert into Ingredient (id, name, type)
-values ('COTO', 'Corn Tortilla', 'WRAP');
+values (2, 'Corn Tortilla', 'WRAP');
 insert into Ingredient (id, name, type)
-values ('GRBF', 'Ground Beef', 'PROTEIN');
+values (3, 'Ground Beef', 'PROTEIN');
 insert into Ingredient (id, name, type)
-values ('CARN', 'Carnitas', 'PROTEIN');
+values (4, 'Carnitas', 'PROTEIN');
 insert into Ingredient (id, name, type)
-values ('TMTO', 'Diced Tomatoes', 'VEGGIES');
+values (5, 'Diced Tomatoes', 'VEGGIES');
 insert into Ingredient (id, name, type)
-values ('LETC', 'Lettuce', 'VEGGIES');
+values (6, 'Lettuce', 'VEGGIES');
 insert into Ingredient (id, name, type)
-values ('CHED', 'Cheddar', 'CHEESE');
+values (7, 'Cheddar', 'CHEESE');
 insert into Ingredient (id, name, type)
-values ('JACK', 'Monterrey Jack', 'CHEESE');
+values (8, 'Monterrey Jack', 'CHEESE');
 insert into Ingredient (id, name, type)
-values ('SLSA', 'Salsa', 'SAUCE');
+values (9, 'Salsa', 'SAUCE');
 insert into Ingredient (id, name, type)
-values ('SRCR', 'Sour Cream', 'SAUCE');
+values (10, 'Sour Cream', 'SAUCE');

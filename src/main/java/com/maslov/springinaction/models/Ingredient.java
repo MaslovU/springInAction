@@ -17,7 +17,7 @@ import javax.persistence.Id;
 public class Ingredient {
 
     @Id
-    private String id;
+    private Long id;
 
     private String name;
 
