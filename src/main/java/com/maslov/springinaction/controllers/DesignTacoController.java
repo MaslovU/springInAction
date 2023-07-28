@@ -4,7 +4,7 @@ import com.maslov.springinaction.enums.Type;
 import com.maslov.springinaction.models.Ingredient;
 import com.maslov.springinaction.models.Taco;
 import com.maslov.springinaction.models.TacoOrder;
-import com.maslov.springinaction.repos.IngredientRepository;
+import com.maslov.springinaction.services.IngredientService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,11 +23,10 @@ import java.util.stream.Collectors;
 @SessionAttributes("tacoOrder")
 public class DesignTacoController {
 
-    private final IngredientRepository repo;
+    private final IngredientService service;
 
-    @Autowired
-    public DesignTacoController(IngredientRepository repo) {
-        this.repo = repo;
+    public DesignTacoController(IngredientService service) {
+        this.service = service;
     }
 
     @GetMapping
@@ -39,7 +38,7 @@ public class DesignTacoController {
     public String processTaco(@ModelAttribute("design") @Valid Taco taco, Errors errors, Model model) {
 
         if (errors.hasErrors()) {
-            List<Ingredient> ingredients = (List<Ingredient>) repo.findAll();
+            List<Ingredient> ingredients = service.getAllIngredients();
 
             Type[] types = Type.values();
             for (Type x : types) {
@@ -59,7 +58,7 @@ public class DesignTacoController {
     @ModelAttribute
     public void addIngredientsToModel(Model model) {
         List<Ingredient> ingredients = new ArrayList<>();
-        repo.findAll().forEach(i -> ingredients.add(i));
+        service.getAllIngredients().forEach(i -> ingredients.add(i));
 
         Type[] types = Type.values();
         for (Type type : types) {
