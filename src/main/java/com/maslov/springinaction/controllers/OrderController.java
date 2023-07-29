@@ -45,6 +45,8 @@ public class OrderController {
             return "orderForm";
         }
 
+        tacoOrder.setUser(user);
+
         service.saveOrder(tacoOrder);
         sessionStatus.setComplete();
 
