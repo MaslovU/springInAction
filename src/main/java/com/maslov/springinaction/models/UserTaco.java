@@ -1,5 +1,6 @@
 package com.maslov.springinaction.models;
 
+import com.maslov.springinaction.enums.Role;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,9 +30,10 @@ public class UserTaco implements UserDetails {
     private final String state;
     private final String zip;
     private final String phoneNumber;
+    private final Role role;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        return Arrays.asList(new SimpleGrantedAuthority("USER"));
     }
     @Override
     public boolean isAccountNonExpired() {
