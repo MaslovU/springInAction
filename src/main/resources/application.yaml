@@ -6,6 +6,9 @@ spring:
     driver-class-name: org.postgresql.Driver
   thymeleaf:
     cache: false
+  data:
+    rest:
+      base-path: /data-api
 
 amex:
   card1: 374245455400126
